@@ -41,7 +41,6 @@ class TournamentTest(TestCase):
         self.assertEqual(len(self.brackets), len(bracket_records), 'Bracket count does not match count inserted')
 
         for r in bracket_records:
-            print(r.name)
             self.assertEqual('{} : {}'.format(self.tourney_name, r.name), r.display_name(), 'Bracket display_name does not match')
 
     def test_seed_values(self):
