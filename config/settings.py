@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'webapp',
     'api'
 ]
@@ -85,6 +86,11 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+
+# Authentication
+
+LOGIN_REDIRECT_URL = '/account'
 
 
 # Password validation

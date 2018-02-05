@@ -1,22 +1,22 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
-# from .models import Greeting
+from .lib.registration import Registration
 
-# Create your views here.
+def test(request):
+    return HttpResponse('Hello from Python!') #noqa
+
 def index(request):
-    return HttpResponse('Hello from Python!')
-    # return render(request, 'index.html')
+    return render(request, 'index.html')
 
+def register(request):
+    reg = Registration(request)
+    success = reg.process()
+    if success:
+        return HttpResponseRedirect('/account')
+    return render(request, 'registration/index.html', {'form' : reg.form})
 
-"""
-def db(request):
-
-    greeting = Greeting()
-    greeting.save()
-
-    greetings = Greeting.objects.all()
-
-    return render(request, 'db.html', {'greetings': greetings})
-"""
-
+@login_required(login_url='/login/')
+def account(request):
+    return render(request, 'account.html')
